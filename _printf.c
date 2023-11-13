@@ -5,16 +5,15 @@ int run_printf(const char *format, va_list args, buffer_t *output);
 int _printf(const char *format, ...);
 
 /**
- * cleanup - Performs cleanup operations for _printf.
+ * cleanup - Peforms cleanup operations for _printf.
  * @args: A va_list of arguments provided to _printf.
  * @output: A buffer_t struct.
  */
-
 void cleanup(va_list args, buffer_t *output)
 {
 	va_end(args);
 	write(1, output->start, output->len);
-	free_beffer(output);
+	free_buffer(output);
 }
 
 /**
@@ -23,16 +22,16 @@ void cleanup(va_list args, buffer_t *output)
  * @output: A buffer_t struct containing a buffer.
  * @args: A va_list of arguments.
  *
- * Return: The number of characters stored output.
+ * Return: The number of characters stored to output.
  */
-
 int run_printf(const char *format, va_list args, buffer_t *output)
 {
 	int i, wid, prec, ret = 0;
 	char tmp;
 	unsigned char flags, len;
 	unsigned int (*f)(va_list, buffer_t *,
-			usigned char, int, int, unsigned char);
+			unsigned char, int, int, unsigned char);
+
 	for (i = 0; *(format + i); i++)
 	{
 		len = 0;
@@ -41,9 +40,11 @@ int run_printf(const char *format, va_list args, buffer_t *output)
 			tmp = 0;
 			flags = handle_flags(format + i + 1, &tmp);
 			wid = handle_width(args, format + i + tmp + 1, &tmp);
-			prec = handle_precision(args, format + i + tmp + 1, &tmp);
+			prec = handle_precision(args, format + i + tmp + 1,
+					&tmp);
 			len = handle_length(format + i + tmp + 1, &tmp);
-			f - handle_specifiers(format + i + tmp + 1);
+
+			f = handle_specifiers(format + i + tmp + 1);
 			if (f != NULL)
 			{
 				i += tmp + 1;
@@ -64,12 +65,11 @@ int run_printf(const char *format, va_list args, buffer_t *output)
 }
 
 /**
- * _printf - Outputs a formatted sring
+ * _printf - Outputs a formatted string.
  * @format: Character string to print - may contain directives.
  *
  * Return: The number of characters printed.
  */
-
 int _printf(const char *format, ...)
 {
 	buffer_t *output;
@@ -88,3 +88,4 @@ int _printf(const char *format, ...)
 
 	return (ret);
 }
+
