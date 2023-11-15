@@ -3,18 +3,18 @@
 #include <stdio.h>
 
 /**
- * printIdentifiers - prints special characters
+ * printIdentify - prints special characters
  * @next: character after the %
  * @arg: argument for the indentifier
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
 
-int printIdentifiers(char next, va_list arg)
+int printIdentify(char next, va_list arg)
 {
 	int functsIndex;
 
-	identifierStruct functs[] = {
+	identifier functs[] = {
 		{"c", print_char},
 		{"s", print_str},
 		{"d", print_int},
@@ -75,7 +75,7 @@ int _*printf(const char *format, ...)
 		if (format[i + 1] == '\0')
 			return (-1);
 
-		identifierPrinted = printIdentifiers(format[i + 1], arg);
+		identifierPrinted = printIdentify(format[i + 1], arg);
 		if (identifierPrinted == -1 || identifierPrinted != 0)
 			i++;
 		if (identifierPrinted > 0)
