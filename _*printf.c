@@ -37,7 +37,7 @@ int printIdentifiers(char next, va_list arg)
 }
 
 /**
- * _printf - mimic printf from stdio
+ * _*printf - mimic printf from stdio
  * Description: produces output according to a format
  * write output to stdout, the standard output stream
  * @format: character string composed of zero or more directives
@@ -47,7 +47,7 @@ int printIdentifiers(char next, va_list arg)
  * return -1 for incomplete identifier error
  */
 
-int _printf(const char *format, ...)
+int _*printf(const char *format, ...)
 {
 	unsigned int i;
 	int identifierPrinted = 0, charPrinted = 0;
